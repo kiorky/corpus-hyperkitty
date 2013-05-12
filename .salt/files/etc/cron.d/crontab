@@ -1,0 +1,11 @@
+{% set cfg = salt['mc_project.get_configuration'](project)%}
+{% set data = cfg.data %}
+
+MAILTO=""
+@hourly            root su {{cfg.user}} -l -c "cd {{data.app_root}};. {{data.py_root}}/bin/activate;python ./manage.py runjobs hourly         >/dev/null"
+@daily             root su {{cfg.user}} -l -c "cd {{data.app_root}};. {{data.py_root}}/bin/activate;python ./manage.py runjobs daily          >/dev/null"
+@weekly            root su {{cfg.user}} -l -c "cd {{data.app_root}};. {{data.py_root}}/bin/activate;python ./manage.py runjobs weekly         >/dev/null"
+@monthly           root su {{cfg.user}} -l -c "cd {{data.app_root}};. {{data.py_root}}/bin/activate;python ./manage.py runjobs monthly        >/dev/null"
+@yearly            root su {{cfg.user}} -l -c "cd {{data.app_root}};. {{data.py_root}}/bin/activate;python ./manage.py runjobs yearly         >/dev/null"
+2,17,32,47 * * * * root su {{cfg.user}} -l -c "cd {{data.app_root}};. {{data.py_root}}/bin/activate;python ./manage.py runjobs quarter_hourly >/dev/null"
+* * * * *          root su {{cfg.user}} -l -c "cd {{data.app_root}};. {{data.py_root}}/bin/activate;python ./manage.py runjobs minutely       >/dev/null"

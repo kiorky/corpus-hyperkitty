@@ -24,6 +24,12 @@ makina-projects.projectname:
     do_bower: false
     do_gulp: false
     configs:
+      crontab:
+        source: "salt://makina-projects/{name}/files/etc/cron.d/crontab"
+        target: "/etc/cron.d/{name}hyperkitty"
+        mode: 640
+        user: root
+        group: root
       {% for i in ['settings_local.py',] %}
       "{{i}}":
         source: "salt://makina-projects/{name}/files/config.py"
