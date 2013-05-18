@@ -10,3 +10,4 @@ django-auth-ldap
 django-allauth
 django-gravatar
 gunicorn
+whoosh
